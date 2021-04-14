@@ -20,26 +20,25 @@ module.exports = {
     update: async(request,response) => {
         const {id} = request.params;
         const {nome,email,senha} = request.body;
-        await Usuario.update({
+        const usuarioUpdated = await Usuario.update({
             nome: nome,
             email: email,
             senha: senha
         }, {
             where: {
                 id: id
-            }
+            },
         })
 
-        return response.status(201).send();
+        return response.status(201).send(usuarioUpdated);
+
     },
     delete: async(request,response) => {
         const {id} = request.params;
-        await Usuario.destroy({
-            where: {
-                id: id
-            }
+        const usuarioDeletado = await Usuario.destroy({
+            where: {id}
         })
 
-        return response.status(201).send();
+        return response.status(201).json(usuarioDeletado);
     }
 }
