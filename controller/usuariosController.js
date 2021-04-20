@@ -3,8 +3,9 @@ const {Op} = require('sequelize');
 
 module.exports = {
     index: async (request,response) => {
-        let usuarios = await Usuario.findAll();
-        return response.json(usuarios);
+        const usuarios =  await Usuario.findAll();
+        
+        return response.render('usuarios', { listaUsuarios: usuarios });
     },
     create: async(request,response) => {
         const {nome,email,senha} = request.body;
